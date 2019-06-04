@@ -11,7 +11,7 @@ export class NavComponent extends React.PureComponent {
                     <NavbarBrand href="/">ERS</NavbarBrand>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink href="/components/">Components</NavLink>
+                            <NavLink href="/clienttests/">Client Test Output</NavLink>
                         </NavItem>
                     </Nav>
                 </Navbar>
