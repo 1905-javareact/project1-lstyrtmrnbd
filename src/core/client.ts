@@ -1,5 +1,5 @@
 import axios from 'axios';
-//import { User } from './model';
+import { User } from './model';
 
 const domain = 'http://localhost:6666'
 
@@ -12,19 +12,53 @@ const client = axios.create({
     withCredentials: true
 });
 
-export async function login(username: string, password: string) {
+async function makeRequest(request) {
 
-    const response = await client.post('/login', {
-        username: username,
-        password: password
+    let response;
+
+    try {
+
+        response = await request();
+
+        if (response.status === 200) {
+
+            return response.data;
+        } else {
+
+            throw (response.status);
+        }
+    } catch (err) {
+
+        console.log(err);
+        return response.status; // undefined if response fails to complete
+    }
+}
+
+export async function login(name: string, pass: string): Promise<User> {
+
+    const data = await makeRequest(() => {
+        client.post('/login', {
+            username: name,
+            password: pass
+        })
     });
 
-    return response.status === 200 ? response.data : null;
+    const { userId, username, password, firstName, lastName, email, role } = data;
+
+    return new User(userId, username, password, firstName, lastName, email, role);
 }
 
 export async function getUserById(id: number) {
 
     const response = await client.get('/users/' + id);
+
+    return response.status === 200 ? response.data : null;
+}
+
+// doesn't necessarily have to be a User object
+export async function updateUser(newUser: User) {
+
+    const response = await client.patch('/users', newUser);
 
     return response.status === 200 ? response.data : null;
 }
