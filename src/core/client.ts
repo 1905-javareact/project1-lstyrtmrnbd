@@ -53,9 +53,14 @@ export async function login(name: string, pass: string) {
 
 export async function getUserById(id: number) {
 
-    const response = await client.get('/users/' + id);
+    const res = await makeRequest(() => {
+        return client.get('/users/' + id)
+    });
 
-    return response.status === 200 ? response.data : null;
+    const { userId, username, password,
+        firstName, lastName, email, role } = res.data;
+
+    return new User(userId, username, password, firstName, lastName, email, role);
 }
 
 // doesn't necessarily have to be a User object
