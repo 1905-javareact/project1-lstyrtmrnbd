@@ -20,7 +20,7 @@ async function makeRequest(request: any) {
 
         response = await request();
 
-        //console.log(response)
+        console.log(response); // test output
 
         if (response.status === 200) {
 
@@ -69,4 +69,13 @@ export async function updateUser(newUser: User) {
     const response = await client.patch('/users', newUser);
 
     return response.status === 200 ? response.data : null;
+}
+
+export async function getReimbursementByStatus(status: number) {
+
+    const res = await makeRequest(() => {
+        return client.get('/reimbursements/status/' + status);
+    });
+
+    return res.data;
 }
