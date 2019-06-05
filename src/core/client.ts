@@ -12,7 +12,7 @@ const client = axios.create({
     withCredentials: true
 });
 
-async function makeRequest(request) {
+async function makeRequest(request: any) {
 
     let response;
 
@@ -20,9 +20,11 @@ async function makeRequest(request) {
 
         response = await request();
 
+        //console.log(response)
+
         if (response.status === 200) {
 
-            return response.data;
+            return response;
         } else {
 
             throw (response.status);
@@ -30,20 +32,21 @@ async function makeRequest(request) {
     } catch (err) {
 
         console.log(err);
-        return response.status; // undefined if response fails to complete
+        console.log(response);
     }
 }
 
-export async function login(name: string, pass: string): Promise<User> {
+export async function login(name: string, pass: string) {
 
-    const data = await makeRequest(() => {
-        client.post('/login', {
+    const res = await makeRequest(() => {
+        return client.post('/login', {
             username: name,
             password: pass
         })
     });
 
-    const { userId, username, password, firstName, lastName, email, role } = data;
+    const { userId, username, password,
+        firstName, lastName, email, role } = res.data;
 
     return new User(userId, username, password, firstName, lastName, email, role);
 }
