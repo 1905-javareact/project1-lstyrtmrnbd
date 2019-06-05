@@ -3,13 +3,14 @@ import React from 'react';
 import { UserView } from './user.view.component';
 import { ReimbursementView } from './reimbursement.view.component';
 import { User, Reimbursement } from '../core/model';
-import { login, getUserById, getReimbursementByStatus } from '../core/client';
+import { login, getUserById, getReimbursementByStatus, getReimbursementByUser } from '../core/client';
 
 interface ITestState {
 
     loginResult: User,
-    getByIdResult: User,
-    getReimByStatusResult: Reimbursement
+    getById: User,
+    getReimByStatus: Reimbursement,
+    getReimByUser: Reimbursement
 }
 
 export class ClientTestComponent extends React.Component<ITestState, any> {
@@ -28,10 +29,13 @@ export class ClientTestComponent extends React.Component<ITestState, any> {
 
         const statusReim = await getReimbursementByStatus(1);
 
+        const userReim = await getReimbursementByUser(2);
+
         this.setState({
             loginResult: loginUser,
-            getByIdResult: idUser,
-            getReimByStatusResult: statusReim
+            getById: idUser,
+            getReimByStatus: statusReim,
+            getReimByUser: userReim
         });
     }
 
@@ -42,9 +46,11 @@ export class ClientTestComponent extends React.Component<ITestState, any> {
                 <p>Testing login as financial manager:</p>
                 <UserView user={this.state.loginResult} />
                 <p>Testing get user by ID:</p>
-                <UserView user={this.state.getByIdResult} />
+                <UserView user={this.state.getById} />
                 <p>Testing get reimbursement by Status ID:</p>
-                <ReimbursementView reimbursement={this.state.getReimByStatusResult} />
+                <ReimbursementView reimbursement={this.state.getReimByStatus} />
+                <p>Testing get reimbursement by User ID:</p>
+                <ReimbursementView reimbursement={this.state.getReimByUser} />
             </div>
         );
     }

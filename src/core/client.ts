@@ -42,7 +42,7 @@ export async function login(name: string, pass: string) {
         return client.post('/login', {
             username: name,
             password: pass
-        })
+        });
     });
 
     const { userId, username, password,
@@ -54,7 +54,7 @@ export async function login(name: string, pass: string) {
 export async function getUserById(id: number) {
 
     const res = await makeRequest(() => {
-        return client.get('/users/' + id)
+        return client.get('/users/' + id);
     });
 
     const { userId, username, password,
@@ -75,6 +75,15 @@ export async function getReimbursementByStatus(status: number) {
 
     const res = await makeRequest(() => {
         return client.get('/reimbursements/status/' + status);
+    });
+
+    return res.data;
+}
+
+export async function getReimbursementByUser(userId: number) {
+
+    const res = await makeRequest(() => {
+        return client.get('/reimbursements/author/userId/' + userId);
     });
 
     return res.data;
