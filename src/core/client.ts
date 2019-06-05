@@ -45,10 +45,7 @@ export async function login(name: string, pass: string) {
         });
     });
 
-    const { userId, username, password,
-        firstName, lastName, email, role } = res.data;
-
-    return new User(userId, username, password, firstName, lastName, email, role);
+    return res.data;
 }
 
 export async function getUserById(id: number) {
@@ -57,18 +54,16 @@ export async function getUserById(id: number) {
         return client.get('/users/' + id);
     });
 
-    const { userId, username, password,
-        firstName, lastName, email, role } = res.data;
-
-    return new User(userId, username, password, firstName, lastName, email, role);
+    return res.data;
 }
 
-// doesn't necessarily have to be a User object
-export async function updateUser(newUser: User) {
+export async function updateUser(newUser) {
 
-    const response = await client.patch('/users', newUser);
+    const res = await makeRequest(() => {
+        return client.patch('/users', newUser)
+    });
 
-    return response.status === 200 ? response.data : null;
+    return res.data;
 }
 
 export async function getReimbursementByStatus(status: number) {
@@ -84,6 +79,24 @@ export async function getReimbursementByUser(userId: number) {
 
     const res = await makeRequest(() => {
         return client.get('/reimbursements/author/userId/' + userId);
+    });
+
+    return res.data;
+}
+
+export async function updateReimbursement(newReim) {
+
+    const res = await makeRequest(() => {
+        return client.patch('/reimbursements', newReim);
+    });
+
+    return res.data;
+}
+
+export async function submitReimbursement(newReim) {
+
+    const res = await makeRequest(() => {
+        return client.post('/reimbursements', newReim);
     });
 
     return res.data;
