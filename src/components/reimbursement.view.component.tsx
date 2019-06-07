@@ -3,7 +3,7 @@ import { Reimbursement } from '../core/model';
 
 function parseDate(value: number) {
 
-    return new Date(value).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+    return new Date(value).toLocaleString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: '2-digit' });
 }
 
 interface IReimbursementViewProps {
