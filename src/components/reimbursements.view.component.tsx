@@ -7,27 +7,18 @@ interface IReimsViewProps {
     reimbursements: Reimbursement[]
 }
 
-interface IReimsViewState {
-
-    reims: JSX.Element[]
-}
-
-export class ReimbursementsView extends React.Component<IReimsViewProps, IReimsViewState> {
-
-    constructor(props) {
-        super(props);
-
-        const reims = this.props.reimbursements.map((reim) => {
-            return (<ReimbursementView key={reim.reimbursementId} reimbursement={reim} />);
-        });
-        this.state = { reims: reims };
-    }
+export class ReimbursementsView extends React.PureComponent<IReimsViewProps> {
 
     render() {
 
+        const reims = this.props.reimbursements;
+
         return (
             <div>
-                {this.state.reims}
+                {reims.map((reim) => {
+                    return (<ReimbursementView key={reim.reimbursementId}
+                        reimbursement={reim} />);
+                })}
             </div>
         );
     }
