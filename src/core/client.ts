@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { User } from './model';
 
 const domain = 'http://localhost:6666'
 

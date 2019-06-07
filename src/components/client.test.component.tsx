@@ -1,16 +1,16 @@
 import React from 'react';
 
 import { UserView } from './user.view.component';
-import { ReimbursementView } from './reimbursement.view.component';
-import { User, Reimbursement } from '../core/model';
+import { ReimbursementsView } from './reimbursements.view.component';
+import { User, Reimbursement, placeholderUser, placeholderReim } from '../core/model';
 import { login, getUserById, getReimbursementByStatus, getReimbursementByUser } from '../core/client';
 
 interface ITestState {
 
     loginResult: User,
     getById: User,
-    getReimByStatus: Reimbursement,
-    getReimByUser: Reimbursement
+    getReimByStatus: Reimbursement[],
+    getReimByUser: Reimbursement[]
 }
 
 export class ClientTestComponent extends React.Component<ITestState, any> {
@@ -44,13 +44,13 @@ export class ClientTestComponent extends React.Component<ITestState, any> {
         return (
             <div>
                 <p>Testing login as financial manager:</p>
-                <UserView user={this.state.loginResult} />
+                <UserView user={this.state.loginResult || placeholderUser} />
                 <p>Testing get user by ID:</p>
-                <UserView user={this.state.getById} />
+                <UserView user={this.state.getById || placeholderUser} />
                 <p>Testing get reimbursement by Status ID:</p>
-                <ReimbursementView reimbursement={this.state.getReimByStatus} />
+                <ReimbursementsView reimbursements={this.state.getReimByStatus || [placeholderReim]} />
                 <p>Testing get reimbursement by User ID:</p>
-                <ReimbursementView reimbursement={this.state.getReimByUser} />
+                <ReimbursementsView reimbursements={this.state.getReimByUser || [placeholderReim]} />
             </div>
         );
     }

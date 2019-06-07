@@ -35,6 +35,8 @@ class Role {
     }
 }
 
+export const placeholderUser = new User(0, '', '', '', '', '', new Role(0, ''));
+
 const roles = {
 
     admin: new Role(1, 'admin'),
@@ -110,3 +112,4 @@ class ReimbursementType {
     }
 }
 
+export const placeholderReim = new Reimbursement(0, 0, 0, 0, 0, '', 0, 0, 0);
