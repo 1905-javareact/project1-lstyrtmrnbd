@@ -9,10 +9,11 @@ import { ClientTestComponent } from './components/client.test.component';
 import { LoginComponent } from './components/login.component';
 import { SelectReimbursementIdComponent } from './components/reimbyidselect.component';
 import { EditReimbursementComponent } from './components/edit.reim.component';
-import { placeholderReim } from './core/model';
+import { placeholderReim, placeholderUser } from './core/model';
 import { SubmitReimbursementComponent } from './components/submit.reim.component';
 import { ReimbursementsByUserId } from './components/reimbyuser.component';
 import { UserByIdComponent } from './components/userbyid.component';
+import { EditUserComponent } from './components/edit.user.component';
 
 const App: React.FC = () => {
     return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
             <Switch>
                 <Route path='/clienttests' component={ClientTestComponent} />
                 <Route path='/login' component={LoginComponent} />
+                <Route path='/user' render={(props) => <EditUserComponent {...props} user={placeholderUser} />} />
                 <Route path='/select' component={SelectReimbursementIdComponent} />
                 <Route path='/reimbursement' render={(props) => <EditReimbursementComponent {...props} reimbursement={placeholderReim} />} />
                 <Route path='/new' component={SubmitReimbursementComponent} />
