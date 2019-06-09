@@ -27,7 +27,7 @@ export class LoginComponent extends React.Component<ILoginProps, ILoginCompState
     }
 
     loginSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         this.props.loginAction(this.state.username, this.state.password, this.props.history);
     }
 

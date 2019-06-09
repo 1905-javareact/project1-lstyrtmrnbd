@@ -37,7 +37,7 @@ export class SelectReimbursementIdComponent extends React.Component<any, ISelect
                 </Row>
                 <Row>
                     <Col md={{ size: 6, offset: 3 }}>
-                        {this.state.id != 0 ? (<ReimByIdComponent id={this.state.id} />) : (<></>)}
+                        {this.state.id !== 0 ? (<ReimByIdComponent id={this.state.id} />) : (<></>)}
                     </Col>
                 </Row>
             </Container>
