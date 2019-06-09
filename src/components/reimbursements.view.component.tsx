@@ -12,13 +12,16 @@ export class ReimbursementsView extends React.PureComponent<IReimsViewProps> {
     render() {
 
         const reims = this.props.reimbursements;
+        const valid = reims && reims.length > 0;
+
+        const views = reims.map((reim) => {
+            return (<ReimbursementView key={reim.reimbursementId}
+                reimbursement={reim} />);
+        });
 
         return (
             <div>
-                {reims.map((reim) => {
-                    return (<ReimbursementView key={reim.reimbursementId}
-                        reimbursement={reim} />);
-                })}
+                {valid ? views : (<></>)}
             </div>
         );
     }

@@ -30,15 +30,8 @@ export class ReimByIdComponent extends React.Component<IReimByIdProps, IReimById
 
     render() {
 
-        const tsr = this.state.reimbursements;
-        const valid = tsr && tsr.length > 0;
-
         return (
-            <>
-                {
-                    valid ? (<ReimbursementsView reimbursements={tsr} />) : (<></>)
-                }
-            </>
+            <ReimbursementsView reimbursements={this.state.reimbursements} />
         );
     }
 }
