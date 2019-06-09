@@ -11,6 +11,8 @@ import { SelectReimbursementIdComponent } from './components/reimbyidselect.comp
 import { EditReimbursementComponent } from './components/edit.reim.component';
 import { placeholderReim } from './core/model';
 import { SubmitReimbursementComponent } from './components/submit.reim.component';
+import { ReimbursementsByUserId } from './components/reimbyuser.component';
+import { UserByIdComponent } from './components/userbyid.component';
 
 const App: React.FC = () => {
     return (
@@ -22,6 +24,8 @@ const App: React.FC = () => {
                 <Route path='/select' component={SelectReimbursementIdComponent} />
                 <Route path='/reimbursement' render={(props) => <EditReimbursementComponent {...props} reimbursement={placeholderReim} />} />
                 <Route path='/new' component={SubmitReimbursementComponent} />
+                <Route path='/reimbursements/:id' render={(props) => <ReimbursementsByUserId {...props} id={parseInt(props.match.params.id)} />} />
+                <Route path='/users/:id' render={(props) => <UserByIdComponent {...props} id={parseInt(props.match.params.id)} />} />
             </Switch>
         </BrowserRouter>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { User } from '../core/model';
+import { User, placeholderUser } from '../core/model';
 
 interface IUserViewProps {
 
@@ -10,7 +10,7 @@ export class UserView extends React.PureComponent<IUserViewProps> {
 
     render() {
 
-        const user = this.props.user;
+        const user = this.props.user || placeholderUser;
 
         return (
 
