@@ -22,8 +22,15 @@ export class EditReimbursementComponent extends React.Component<IEditReimProps, 
     constructor(props) {
 
         super(props);
+
         const { amount, description, status } = this.props.reimbursement;
-        this.state = { amount: amount, description: description, status: status, submitted: false };
+
+        this.state = {
+            amount: amount,
+            description: description,
+            status: status,
+            submitted: false
+        };
     }
 
     updateAmount = (event) => {
@@ -80,7 +87,7 @@ export class EditReimbursementComponent extends React.Component<IEditReimProps, 
             </Form>);
 
         const success = (
-            <h3>Reimbursement Updated!</h3>
+            <h3>Reimbursement Updated</h3>
         );
 
         return (

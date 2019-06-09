@@ -1,8 +1,6 @@
-//import { combineReducers } from 'redux';
-
+import { combineReducers } from 'redux';
 import { User } from '../core/model';
-
-//import { testReducer } from '../components/client.test.component';
+import { loginReducer } from '../components/login.component';
 
 export interface ILoginState {
 
@@ -15,3 +13,6 @@ export interface IState {
     login: ILoginState
 }
 
+export const state = combineReducers<IState>({
+    login: loginReducer
+});

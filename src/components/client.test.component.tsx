@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Container } from 'reactstrap';
 import { UserView } from './user.view.component';
 import { ReimbursementsView } from './reimbursements.view.component';
 import { User, Reimbursement, placeholderUser, placeholderReim } from '../core/model';
@@ -23,7 +23,7 @@ export class ClientTestComponent extends React.Component<ITestState, any> {
 
     async componentDidMount() {
 
-        const loginUser = await login('overseer0', 'password');
+        const loginUser = await login('admin0', 'password');
 
         const idUser = await getUserById(2);
 
@@ -42,8 +42,8 @@ export class ClientTestComponent extends React.Component<ITestState, any> {
     render() {
 
         return (
-            <div>
-                <p>Testing login as financial manager:</p>
+            <Container>
+                <p>Testing login as:</p>
                 <UserView user={this.state.loginResult || placeholderUser} />
                 <p>Testing get user by ID:</p>
                 <UserView user={this.state.getById || placeholderUser} />
@@ -51,7 +51,7 @@ export class ClientTestComponent extends React.Component<ITestState, any> {
                 <ReimbursementsView reimbursements={this.state.getReimByStatus || [placeholderReim]} />
                 <p>Testing get reimbursement by User ID:</p>
                 <ReimbursementsView reimbursements={this.state.getReimByUser || [placeholderReim]} />
-            </div>
+            </Container>
         );
     }
 }

@@ -67,6 +67,7 @@ const loginAction = (username: string, password: string, history: any) => async 
     } else {
 
         dispatch({ payload: { user: response }, type: loginTypes.LOGIN_SUCCESS });
+        history.push('/clienttests');
     }
 }
 

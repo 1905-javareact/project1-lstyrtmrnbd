@@ -1,20 +1,37 @@
 import React from 'react';
+import { Table, Button } from 'reactstrap';
 import { User, placeholderUser } from '../core/model';
+import { EditUserComponent } from './edit.user.component';
 
 interface IUserViewProps {
 
     user: User
 }
 
-export class UserView extends React.PureComponent<IUserViewProps> {
+interface IUserViewState {
+
+    editing: boolean
+}
+
+export class UserView extends React.Component<IUserViewProps, IUserViewState> {
+
+    constructor(props) {
+
+        super(props);
+        this.state = { editing: false };
+    }
+
+    edit = () => {
+
+        this.setState({ editing: !this.state.editing });
+    }
 
     render() {
 
         const user = this.props.user || placeholderUser;
 
-        return (
-
-            <table>
+        const table = (
+            <Table>
                 <tbody>
                     <tr>
                         <td>User ID:</td>
@@ -37,8 +54,18 @@ export class UserView extends React.PureComponent<IUserViewProps> {
                         <td>{user.role.role}</td>
                     </tr>
                 </tbody>
-            </table>
+            </Table>
+        );
 
+        const edit = (
+            <EditUserComponent user={user} />
+        );
+
+        return (
+            <>
+                <Button onClick={(e) => this.edit()}>Edit</Button>
+                {this.state.editing ? edit : table}
+            </>
         );
     }
 }

@@ -1,9 +1,18 @@
 
-export { User, Role, roles, getRole, Reimbursement, ReimbursementStatus, ReimbursementType }
-
 /// Users----------------------------------
 
-class User {
+export class Role {
+    roleId: number     // primary key
+    role: string       // not null, unique
+
+    constructor(roleId: number, role: string) {
+
+        this.roleId = roleId;
+        this.role = role;
+    }
+}
+
+export class User {
     userId: number     // primary key
     username: string   // not null, unique
     password: string   // not null
@@ -24,27 +33,16 @@ class User {
     }
 }
 
-class Role {
-    roleId: number     // primary key
-    role: string       // not null, unique
-
-    constructor(roleId: number, role: string) {
-
-        this.roleId = roleId;
-        this.role = role;
-    }
-}
-
 export const placeholderUser = new User(0, '', '', '', '', '', new Role(0, ''));
 
-const roles = {
+export const roles = {
 
     admin: new Role(1, 'admin'),
     user: new Role(2, 'user'),
     finMan: new Role(3, 'finance-manager')
 }
 
-function getRole(id: number) {
+export function getRole(id: number) {
 
     let result = null;
 
@@ -57,7 +55,29 @@ function getRole(id: number) {
 
 /// Reimbursements-------------------------
 
-class Reimbursement {
+export class ReimbursementStatus {
+    statusId: number // primary key
+    status: string   // not null, unique
+
+    constructor(id: number, status: string) {
+
+        this.statusId = id;
+        this.status = status;
+    }
+}
+
+export class ReimbursementType {
+    typeId: number // primary key
+    _type: string  // not null, unique
+
+    constructor(id: number, typ: string) {
+
+        this.typeId = id;
+        this._type = typ;
+    }
+}
+
+export class Reimbursement {
     reimbursementId: number   // primary key
     author: number            // foreign key -> User, not null
     amount: number            // not null
@@ -87,28 +107,6 @@ class Reimbursement {
             if (this[field] === null) return false;
         }
         return true;
-    }
-}
-
-class ReimbursementStatus {
-    statusId: number // primary key
-    status: string   // not null, unique
-
-    constructor(id: number, status: string) {
-
-        this.statusId = id;
-        this.status = status;
-    }
-}
-
-class ReimbursementType {
-    typeId: number // primary key
-    _type: string  // not null, unique
-
-    constructor(id: number, typ: string) {
-
-        this.typeId = id;
-        this._type = typ;
     }
 }
 
