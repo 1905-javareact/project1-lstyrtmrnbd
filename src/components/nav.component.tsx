@@ -13,6 +13,9 @@ export class NavComponent extends React.PureComponent {
                         <NavItem>
                             <NavLink href="/clienttests/">Client Test Output</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink href="/login">Login</NavLink>
+                        </NavItem>
                     </Nav>
                 </Navbar>
             </div>
