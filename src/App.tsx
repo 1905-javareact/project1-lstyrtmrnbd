@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login.component';
 import { SelectReimbursementIdComponent } from './components/reimbyidselect.component';
 import { EditReimbursementComponent } from './components/edit.reim.component';
 import { placeholderReim } from './core/model';
+import { SubmitReimbursementComponent } from './components/submit.reim.component';
 
 const App: React.FC = () => {
     return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
                 <Route path='/login' component={LoginComponent} />
                 <Route path='/select' component={SelectReimbursementIdComponent} />
                 <Route path='/reimbursement' render={(props) => <EditReimbursementComponent {...props} reimbursement={placeholderReim} />} />
+                <Route path='/new' component={SubmitReimbursementComponent} />
             </Switch>
         </BrowserRouter>
     );

@@ -46,7 +46,7 @@ export class EditReimbursementComponent extends React.Component<IEditReimProps, 
         return (
 
             <Container>
-                <Form>
+                <Form onSubmit={this.editSubmit}>
                     <FormGroup>
                         <Label for="inputAmount">Amount</Label>
                         <Input type="number" name="amount" id="inputAmount" placeholder={amount.toString()} onChange={this.updateAmount} />
