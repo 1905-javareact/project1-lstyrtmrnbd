@@ -112,4 +112,4 @@ class ReimbursementType {
     }
 }
 
-export const placeholderReim = new Reimbursement(0, 0, 0, 0, 0, '', 0, 0, 0);
+export const placeholderReim = new Reimbursement(0, 0, 0, 0, 0, '', 0, 1, 1);

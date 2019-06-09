@@ -9,6 +9,12 @@ interface ISubmitReimState {
 
 export class SubmitReimbursementComponent extends React.Component<any, ISubmitReimState> {
 
+    constructor(props) {
+
+        super(props);
+        this.state = { amount: 0, description: '' };
+    }
+
     updateAmount = (event) => {
         this.setState({ amount: event.target.value });
     }

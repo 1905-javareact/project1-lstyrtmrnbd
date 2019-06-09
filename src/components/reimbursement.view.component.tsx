@@ -1,7 +1,9 @@
 import React from 'react';
+import { Table, Button } from 'reactstrap';
 import { Reimbursement } from '../core/model';
+import { EditReimbursementComponent } from './edit.reim.component';
 
-function parseDate(value: number) {
+export function parseDate(value: number) {
 
     return new Date(value).toLocaleString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: '2-digit' });
 }
@@ -11,14 +13,30 @@ interface IReimbursementViewProps {
     reimbursement: Reimbursement
 }
 
-export class ReimbursementView extends React.PureComponent<IReimbursementViewProps> {
+interface IReimbursementViewState {
+
+    editing: boolean
+}
+
+export class ReimbursementView extends React.Component<IReimbursementViewProps, IReimbursementViewState> {
+
+    constructor(props) {
+
+        super(props);
+        this.state = { editing: false };
+    }
+
+    edit = () => {
+
+        this.setState({ editing: !this.state.editing });
+    }
 
     render() {
 
         const reim = this.props.reimbursement;
 
-        return (
-            <table>
+        const table = (
+            <Table>
                 <tbody>
                     <tr>
                         <td>ID:</td>
@@ -53,7 +71,18 @@ export class ReimbursementView extends React.PureComponent<IReimbursementViewPro
                         <td>{parseDate(reim.dateResolved)}</td>
                     </tr>
                 </tbody>
-            </table>
+            </Table>
+        );
+
+        const edit = (
+            <EditReimbursementComponent reimbursement={reim} />
+        );
+
+        return (
+            <>
+                <Button onClick={(e) => this.edit()}>Edit</Button>
+                {this.state.editing ? edit : table}
+            </>
         );
     }
 }
