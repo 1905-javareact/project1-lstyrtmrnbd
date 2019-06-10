@@ -15,6 +15,7 @@ import { ClientTestComponent } from './components/client.test.component';
 import { SelectReimbursementIdComponent } from './components/reimbyidselect.component';
 import { ReimbursementsByUserId } from './components/reimbyuser.component';
 import { UserByIdComponent } from './components/userbyid.component';
+import { UserSelectComponent } from './components/userselectid.component';
 
 const App: React.FC = () => {
     return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
                     <Route path='/new' component={SubmitReimbursementComponent} />
                     <Route path='/reimbursements/:id' render={(props) => <ReimbursementsByUserId {...props} id={parseInt(props.match.params.id)} />} />
                     <Route path='/users/:id' render={(props) => <UserByIdComponent {...props} id={parseInt(props.match.params.id)} />} />
+                    <Route path='/users' component={UserSelectComponent} />
                 </Switch>
             </BrowserRouter>
         </Provider >

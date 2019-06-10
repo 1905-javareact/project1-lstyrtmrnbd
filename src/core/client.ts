@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-const domain = 'http://localhost:6666'
+const domain = 'http://ec2-54-221-87-35.compute-1.amazonaws.com:6666'
+//const domain = 'http://localhost:6666';
 
 const client = axios.create({
     baseURL: domain,
-    timeout: 1000,
+    timeout: 30000,
     headers: {
         'Content-Type': 'application/json'
     },

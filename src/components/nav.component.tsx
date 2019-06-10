@@ -83,6 +83,9 @@ export class NavComponent extends React.Component<INavProps, any> {
                     <NavLink tag={Link} to="/select">View</NavLink>
                 </NavItem>
                 <NavItem>
+                    <NavLink tag={Link} to="/users">Users</NavLink>
+                </NavItem>
+                <NavItem>
                     <NavLink tag={Link} to="/login">Logout</NavLink>
                 </NavItem>
             </>

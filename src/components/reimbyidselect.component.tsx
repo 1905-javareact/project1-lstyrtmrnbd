@@ -15,29 +15,37 @@ export class SelectReimbursementIdComponent extends React.Component<any, ISelect
         this.state = { id: 0 };
     }
 
-    setId(id: number) {
+    setId = (newId) => {
 
-        this.setState({ id: id });
+        this.setState(prevState => ({
+            id: newId
+        }));
     }
 
     render() {
+
+        const reims = (
+            <ReimByIdComponent id={this.state.id} />
+        );
+
+        const valid = this.state.id !== 0;
 
         return (
             <Container>
                 <Row>
                     <Col>
-                        <Button onClick={(e) => { this.setId(1) }}>Pending</Button>
+                        <Button onClick={(e) => this.setId(1)}>Pending</Button>
                     </Col>
                     <Col>
-                        <Button onClick={(e) => { this.setId(2) }}>Approved</Button>
+                        <Button onClick={(e) => this.setId(2)}>Approved</Button>
                     </Col>
                     <Col>
-                        <Button onClick={(e) => { this.setId(3) }}>Denied</Button>
+                        <Button onClick={(e) => this.setId(3)}>Denied</Button>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={{ size: 6, offset: 3 }}>
-                        {this.state.id !== 0 ? (<ReimByIdComponent id={this.state.id} />) : (<></>)}
+                        {valid ? reims : <></>}
                     </Col>
                 </Row>
             </Container>
