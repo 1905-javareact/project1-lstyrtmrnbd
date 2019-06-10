@@ -1,18 +1,34 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { User } from '../core/model';
+import { IState } from '../reducers';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { submitReimbursement } from '../core/client';
 
 interface ISubmitReimState {
 
     amount: number
     description: string
+    type: number
+    submitted: boolean
 }
 
-export class SubmitReimbursementComponent extends React.Component<any, ISubmitReimState> {
+interface ISubmitReimProps {
+
+    currentUser: User
+}
+
+export class SubmitReimbursementComponent extends React.Component<ISubmitReimProps, ISubmitReimState> {
 
     constructor(props) {
 
         super(props);
-        this.state = { amount: 0, description: '' };
+        this.state = {
+            amount: 0,
+            description: '',
+            type: 1,
+            submitted: false
+        };
     }
 
     updateAmount = (event) => {
@@ -23,9 +39,20 @@ export class SubmitReimbursementComponent extends React.Component<any, ISubmitRe
         this.setState({ description: event.target.value });
     }
 
-    submit = (event) => {
+    submit = async (event) => {
 
         event.preventDefault();
+
+        const newReim = {
+            author: this.props.currentUser.userId,
+            amount: this.state.amount,
+            description: this.state.description,
+            type: this.state.type
+        };
+
+        const response = await submitReimbursement(newReim);
+
+        this.setState({ submitted: response ? true : false });
     }
 
     render() {
@@ -47,3 +74,12 @@ export class SubmitReimbursementComponent extends React.Component<any, ISubmitRe
         );
     }
 }
+
+const mapStateToProps = (state: IState) => {
+
+    return {
+        currentUser: state.login.currentUser
+    }
+}
+
+export default connect(mapStateToProps, null)(SubmitReimbursementComponent);

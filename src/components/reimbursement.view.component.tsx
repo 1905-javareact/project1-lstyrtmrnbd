@@ -3,9 +3,9 @@ import { Table, Button } from 'reactstrap';
 import { Reimbursement } from '../core/model';
 import { EditReimbursementComponent } from './edit.reim.component';
 
-export function parseDate(value: number) {
+export function parseDate(value: any) {
 
-    return new Date(value).toLocaleString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: '2-digit' });
+    return new Date(parseInt(value)).toLocaleString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
 }
 
 interface IReimbursementViewProps {
